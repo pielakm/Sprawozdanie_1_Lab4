@@ -1,0 +1,27 @@
+
+# Użycie oficjalnego obrazu Ubuntu w najnowszej wersji jako bazowego obrazu
+FROM ubuntu:latest
+
+# Aktualizacja systemu Ubuntu
+RUN apt-get update && apt-get upgrade -y
+
+# Instalacja serwera HTTP Apache
+RUN apt-get install apache2 -y
+
+# Kopiowanie pliku index.html z lokalnego katalogu do katalogu /var/www/html w kontenerze
+COPY index.html /var/www/html/index.html
+
+# Dodanie moich danych
+LABEL maintainer="Mateusz Pielak <s97704@pollub.edu.pl>"
+
+# Ustawienie kontenera do nasłuchiwania na porcie 80
+EXPOSE 80
+
+# Uruchamiamy serwer Apache przy starcie kontenera
+CMD ["apache2ctl", "-D", "FOREGROUND"]
+
+
+
+
+
+
